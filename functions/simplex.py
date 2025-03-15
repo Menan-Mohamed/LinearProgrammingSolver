@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 
 def simplex(arr, varnum, constraints):
@@ -21,6 +22,8 @@ def simplex(arr, varnum, constraints):
     for i in range(varnum):
         nparr[0][i] *= -1
 
+    ##inseration a
+
     flagend = 1
 
     while(flagend):
@@ -30,7 +33,7 @@ def simplex(arr, varnum, constraints):
             col = np.argmax(nparr[0])
 
         minpos = 1000
-        minrate = nparr[1][varnum+constraints]
+        minrate = sys.maxsize
         for i in range (1,constraints+1):
             if nparr[i][col] > 0 :
                 if nparr[i][varnum+constraints] / nparr[i][col] < minrate :
@@ -59,7 +62,9 @@ def simplex(arr, varnum, constraints):
                 if nparr[0][i] > 0 :
                     flagend = 1
 
+    print(vararr)
     print(basicarr)
+    np.set_printoptions(suppress=True, precision=2)
     print(nparr)
 
 
@@ -67,9 +72,10 @@ def simplex(arr, varnum, constraints):
 
 
 
-array = [[5,-4,6,-8,0,0],
-         [1,2,2,4,-1,40],
-         [2,-1,1,2,-1,8],
-         [4,-2,1,-1,-1,10]]
+array = [[20,10,15,1,0],
+         [3,2,5,-1,55],
+         [2,1,1,-1,26],
+         [1,1,3,-1,30],
+         [5,2,4,-1,57]]
 
-simplex(array,4,3)
+simplex(array,3,4)
