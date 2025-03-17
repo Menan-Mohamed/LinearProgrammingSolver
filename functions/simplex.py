@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 
 def simplex(arr, varnum, constraints): ## modify ot to BigM 
@@ -27,6 +28,8 @@ def simplex(arr, varnum, constraints): ## modify ot to BigM
     for i in range(varnum):
         nparr[0][i] *= -1
 
+    ##inseration a
+
     flagend = 1
 
     ##MODIFY z COL BEFORE ENTERING THE SMPLEX WHILE
@@ -38,7 +41,7 @@ def simplex(arr, varnum, constraints): ## modify ot to BigM
             col = np.argmax(nparr[0])
 
         minpos = 1000
-        minrate = nparr[1][varnum+constraints]
+        minrate = sys.maxsize
         for i in range (1,constraints+1):
             if nparr[i][col] > 0 :
                 if nparr[i][varnum+constraints] / nparr[i][col] < minrate :
@@ -67,17 +70,10 @@ def simplex(arr, varnum, constraints): ## modify ot to BigM
                 if nparr[0][i] > 0 :
                     flagend = 1
 
+    print(vararr)
     print(basicarr)
+    np.set_printoptions(suppress=True, precision=2)
     print(nparr)
 
 
     
-
-
-
-array = [[2,-4,6,-8,0,0],
-         [1,2,2,4,-1,40],
-         [2,-1,1,2,-1,8],
-         [4,-2,1,-1,-1,10]]
-
-simplex(array,4,3)
