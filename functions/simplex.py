@@ -1,20 +1,26 @@
 import numpy as np
 
-def simplex(arr, varnum, constraints):
+def simplex(arr, varnum, constraints): ## modify ot to BigM 
 
     nparr = np.array(arr, dtype=float)
     maxi = nparr[0][varnum]
     
     vararr = np.array([f"x{i+1}" for i in range(varnum)] + [f"s{i+1}" for i in range(constraints)])
-    basicarr = np.array([f"s{i+1}" for i in range(constraints)])
+    basicarr = np.array([f"s{i+1}" for i in range(constraints)]) ##modify for adding artifical also IN CORRECT CONTRAINT 
+    ##ARTIFICAL IN > ARTIFICAL +SLAG IN > SLAG IN <
 
-    nparr = np.delete(nparr, -2, axis=1)        #delete flags
+    nparr = np.delete(nparr, -2, axis=1)    
 
     for i in range (constraints):
-       nparr = np.insert(nparr, varnum, 0, axis=1)         #insert slags var
+       nparr = np.insert(nparr, varnum, 0, axis=1)         #insert slags var for only contratins contain slag
 
     j=0
-    for i in range (1,constraints+1):               #edit the coeff
+
+
+    ##add artificaile and mange diferent contraint
+
+    ##add cols for m in objective function
+    for i in range (1,constraints+1):             
         nparr[i][varnum+j] = 1
         j += 1
     
@@ -22,6 +28,8 @@ def simplex(arr, varnum, constraints):
         nparr[0][i] *= -1
 
     flagend = 1
+
+    ##MODIFY z COL BEFORE ENTERING THE SMPLEX WHILE
 
     while(flagend):
         if maxi :
@@ -67,7 +75,7 @@ def simplex(arr, varnum, constraints):
 
 
 
-array = [[5,-4,6,-8,0,0],
+array = [[2,-4,6,-8,0,0],
          [1,2,2,4,-1,40],
          [2,-1,1,2,-1,8],
          [4,-2,1,-1,-1,10]]
