@@ -1,6 +1,8 @@
 import sys
 import numpy as np
 
+from constraction import construct_tableau
+
 
 def simpleximplementation(tableau,vararr,basicarr,maxi):
     
@@ -65,3 +67,12 @@ def simpleximplementation(tableau,vararr,basicarr,maxi):
 #        [4,-2,1,-1,0,0,1,10]]
 # maxi = 0
 # simpleximplementation(arr,var,basic,maxi)
+
+# arr = [[5,-4,6,-8,0,0],
+#        [1,2,2,4,-1,40],
+#        [2,-1,1,2,-1,8],
+#        [4,-2,1,-1,-1,10]]
+# maxi = 0
+# tableau,vararr,basic_vars = construct_tableau(arr,[1,1,1,1],4,3)
+# tableau[0] *= -1
+# simpleximplementation(tableau,vararr,basic_vars,maxi)
