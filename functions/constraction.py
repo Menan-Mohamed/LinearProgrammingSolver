@@ -85,13 +85,14 @@ def construct_tableau(arr,unsflags,varnum,constraints):
     print(tableau)
     print(vararr,basic_vars)
 
-
+    x,y,z = tableau,vararr,basic_vars
+    print (x,y,z)
     return tableau,vararr,basic_vars
 
 
 
-# arr = [[30,-4,5,0,0],
-#        [5,-1,5,0,30],
-#        [1,0,2,-1,5]]
+# arr = [[30.0,-4.0,5.0,0,0],
+#        [5.0,-1.0,5.0,0.0,30.0],
+#        [1.0,0.0,2.0,-1,5.0]]
 # flag = [1,1,1]
-# construct_tableau(arr,0,flag,3,2)
+# construct_tableau(arr,flag,3,2)

@@ -1,8 +1,6 @@
 import sys
 import numpy as np
 
-from constraction import construct_tableau
-
 
 def simpleximplementation(tableau,vararr,basicarr,maxi):
     

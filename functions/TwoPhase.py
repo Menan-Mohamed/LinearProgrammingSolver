@@ -1,6 +1,9 @@
 import numpy as np
-from simplex_iteration import simpleximplementation
-from constraction import construct_tableau
+
+# from functions.constraction import construct_tableau
+from functions.simplex_iteration import simpleximplementation
+
+# from constraction import construct_tableau
 
 
 
@@ -71,14 +74,14 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
 #     [1, 1, 1, 0, 7],  # Constraint 1: x1 + x2 ≤ 7
 #     [2, -5, 1, 1, 10],  # Constraint 2: 2x1 - 5x2 = 10
 # ]
-# two_phase_simplex(array, 3, 2)
-array = [
+# # two_phase_simplex(array, 3, 2)
+# array = [
    
-    [6, 3, 0, 0],  # Objective function
-    [1,1,1,1],
-    [2, -1, 1, 1],  # Constraint 1: x1 + x2 ≤ 7
-    [0, 3, -1, 2],  # Constraint 2: 2x1 - 5x2 = 10
-]
+#     [6, 3, 0, 0],  # Objective function
+#     [1,1,1,1],
+#     [2, -1, 1, 1],  # Constraint 1: x1 + x2 ≤ 7
+#     [0, 3, -1, 2],  # Constraint 2: 2x1 - 5x2 = 10
+# ]
 
-tableau,vararr,basic_vars,maxi = construct_tableau(array,0,[1,1],2,3)
-two_phase_simplex(array,tableau,vararr,basic_vars,maxi)
+# tableau,vararr,basic_vars = construct_tableau(array,[1,1],2,3)
+# two_phase_simplex(array,tableau,vararr,basic_vars,1)

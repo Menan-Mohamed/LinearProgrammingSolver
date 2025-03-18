@@ -1,6 +1,8 @@
 import numpy as np
-from simplex_iteration import simpleximplementation
-from constraction import construct_tableau
+
+from functions.simplex_iteration import simpleximplementation
+# from simplex_iteration import simpleximplementation
+# from constraction import construct_tableau
 
 
 def BigM(tableau,vararr,basic_vars,is_max):
@@ -54,11 +56,11 @@ def BigM(tableau,vararr,basic_vars,is_max):
 
 # simplex(array, 2,3)
 # array = [
-#     [1, 5,1, 0],  # Objective function
+#     [1, 5,0, 0],  # Objective function
 #     [3, 4, -1, 6],  # Constraint 1: x1 + x2 ≤ 7
 #     [1,3,1,2],
 #     # Constraint 2: 2x1 - 5x2 = 10
 # ]
 
-# tableau,vararr,basic_vars =  construct_tableau(array,[1,1,1],3,2)
+# tableau,vararr,basic_vars =  construct_tableau(array,[1,1],2,2)
 # BigM(tableau,vararr,basic_vars,1)
