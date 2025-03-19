@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore,  QtWidgets
 from functions import *
 from functions.constraction import construct_tableau
 from functions.simplex_iteration import simpleximplementation
@@ -6,37 +6,42 @@ from functions.BigM import BigM
 from functions.TwoPhase import two_phase_simplex
 
 
-
-
 class Ui_Dialog(object):
-    def setupUi(self, Dialog):
+
+    def setupUi(self, Dialog, main_app):
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(600, 600)
-        Dialog.setStyleSheet("background-color: rgba(240, 255, 240, 0.5);")
+        Dialog.setStyleSheet("background-color: rgba(220, 220, 220, 0.5);")
+        self.main_app = main_app
         
         self.widget = QtWidgets.QWidget(parent=Dialog)
         self.widget.setGeometry(QtCore.QRect(20, 20, 560, 560))
+        self.widget.setStyleSheet("""
+            background-color: rgba(245, 245, 245, 0.7);  /* Semi-transparent gray */
+
+        """)
         
         self.label = QtWidgets.QLabel("Enter the number of variables in the objective function:", parent=self.widget)
         self.label.setGeometry(QtCore.QRect(20, 10, 400, 30))
-        self.label.setStyleSheet("border-radius: 5px;font-size: 14px; font-weight: bold; color: #333;")
+        self.label.setStyleSheet("border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
           
         self.lineEdit = QtWidgets.QLineEdit(parent=self.widget)
         self.lineEdit.setGeometry(QtCore.QRect(20, 45, 180, 30))
         self.lineEdit.setPlaceholderText("enter here")
-        self.lineEdit.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.lineEdit.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #334;")
         
         self.pushButton_setVars = QtWidgets.QPushButton("Set", parent=self.widget)
         self.pushButton_setVars.setGeometry(QtCore.QRect(220, 45, 100, 30))
-        self.pushButton_setVars.setStyleSheet("border-radius: 10px; background-color: #4CAF50; color: white;")
+        self.pushButton_setVars.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
          
         self.label_2 = QtWidgets.QLabel("Enter the coefficients of the objective function:", parent=self.widget)
         self.label_2.setGeometry(QtCore.QRect(20, 88, 400, 30))
-        self.label_2.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.label_2.setStyleSheet("border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
 
         self.widget_2 = QtWidgets.QWidget(parent=self.widget)
         self.widget_2.setGeometry(QtCore.QRect(20, 121, 500, 40))
-        self.widget_2.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.widget_2.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
         self.layout_obj = QtWidgets.QHBoxLayout(self.widget_2)
 
         self.lineEdits_obj = [] 
@@ -51,12 +56,12 @@ class Ui_Dialog(object):
 
         self.pushButton = QtWidgets.QPushButton("Add a constraint row +", parent=self.widget)
         self.pushButton.setGeometry(QtCore.QRect(20, 174, 200, 30))
-        self.pushButton.setStyleSheet("border-radius: 10px; background-color: #4CAF50; color: white;")
+        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
 
         self.dropdown2 = QtWidgets.QComboBox(parent=self.widget)
         self.dropdown2.addItems(["Big M", "Two Phase"])
         self.dropdown2.setGeometry(QtCore.QRect(340, 174, 200, 30))
-        self.dropdown2.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.dropdown2.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
 
 
         self.scrollArea = QtWidgets.QScrollArea(parent=self.widget)
@@ -66,25 +71,25 @@ class Ui_Dialog(object):
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.constraintsLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
 
-        self.label_3 = QtWidgets.QLabel("enter decision variables' constraints (≤ restricted,- unrestricted)", parent=self.widget)
+        self.label_3 = QtWidgets.QLabel("Enter decision variables' constraints (≤ restricted,- unrestricted)", parent=self.widget)
         self.label_3.setGeometry(QtCore.QRect(20, 419, 500, 30))
-        self.label_3.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.label_3.setStyleSheet("border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
 
 
         self.widget_3 = QtWidgets.QWidget(parent=self.widget)
         self.widget_3.setGeometry(QtCore.QRect(20, 450, 500, 40))
-        self.widget_3.setStyleSheet("border-radius: 10px;font-size: 14px; font-weight: bold; color: #333;")
+        self.widget_3.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
         self.layout_vec = QtWidgets.QHBoxLayout(self.widget_3)
 
          
 
         self.pushButton_2 = QtWidgets.QPushButton("Submit", parent=self.widget)
         self.pushButton_2.setGeometry(QtCore.QRect(380, 510, 161, 30))
-        self.pushButton_2.setStyleSheet("border-radius: 10px; background-color:#4CAF50; color: white;")
+        self.pushButton_2.setStyleSheet("border-radius: 2px; background-color:#4CAF50; color: white;")
 
         self.pushButton_3 = QtWidgets.QPushButton("Back", parent=self.widget)
         self.pushButton_3.setGeometry(QtCore.QRect(20, 510, 161, 30))
-        self.pushButton_3.setStyleSheet("border-radius: 10px; background-color: #4CAF50; color: white;")
+        self.pushButton_3.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
 
 
         self.pushButton.clicked.connect(self.addConstraintRow)
@@ -143,7 +148,8 @@ class Ui_Dialog(object):
             except ValueError:
                 row.append(0)  
 
-        print(self.dropdown1.currentText()  +"jjj")
+        # print(self.dropdown1.currentText()  +"jjj")
+
         if (self.dropdown1.currentText() == "Maximize"):
             row.append(1)
         else:
@@ -203,7 +209,7 @@ class Ui_Dialog(object):
 
             self._2Darray.append(row_values)
 
-        print("2Darray:", self._2Darray)
+        # print("2Darray:", self._2Darray)
 
     def onSubmit(self):
 
@@ -220,34 +226,35 @@ class Ui_Dialog(object):
 
         tableau,vararr,basic_vars = construct_tableau(self._2Darray,vec,varnum,constraints)
         maxi = 1 if self.dropdown1.currentText() == "Maximize" else 0       
-        print("maxi", maxi)
-        print("maxi",self.dropdown2.currentText() )
-        print("maxi", self.simplex)
-
-       
+        # print("maxi", maxi)
+        # print("maxi",self.dropdown2.currentText() )
+        # print("self.simplex", self.simplex)
 
         if(self.simplex == 1):
             tableau[0] *= -1
-            simpleximplementation(tableau,vararr,basic_vars,maxi)
-            
+            self.output_text, _, _, _ = simpleximplementation(tableau,vararr,basic_vars,maxi)
+
+            # print(self.output_text)
+
+            # if hasattr(self, 'main_app'):  # ensure main_app exists
+            #     self.main_app.go_to_output(self.output_text)
+            #     print("jaanr: hereee") 
+            # else:
+            #     print("Error: main_app is not set in Ui_Dialog") 
+
         elif(self.dropdown2.currentText() == "Big M"):
             # print("maxi", "jjjjj")
-            BigM(tableau,vararr,basic_vars,maxi)
+            self.output_text = BigM(tableau,vararr,basic_vars,maxi)
 
         elif(self.dropdown2.currentText() == "Two Phase"):
             # print("maxi", "jjjjj")
-            two_phase_simplex(self._2Darray,tableau,vararr,basic_vars,maxi)
+            self.output_text = two_phase_simplex(self._2Darray,tableau,vararr,basic_vars,maxi)
 
-        # print("Length of _2Darray:", tableau,vararr,basic_vars
+        self.main_app.go_to_output(self.output_text)   
+
+
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle("Linear Programming Solver")
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec())
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Linear Programming Solver"))
+        self.label.setText(_translate("Dialog", "Linear Programming Solver"))
+        self.pushButton.setText(_translate("Dialog", "Linear Programming Solver"))

@@ -1,41 +1,41 @@
 import numpy as np
-
-from functions.simplex_iteration import simpleximplementation
-# from simplex_iteration import simpleximplementation
-# from constraction import construct_tableau
+from functions.simplex_iteration import simpleximplementation,format_tableau_html
 
 
 def BigM(tableau,vararr,basic_vars,is_max):
+
+    steps = "<h2>BigM Method Steps</h2>"
      
-    # Modify the objective function to include the Big M penalty for artificial variables
     M = 100 if is_max else -100 
 
     tableau[0] *= -1
-    tableau[0] = np.where(tableau[0] == -0.0, 0.0, tableau[0])  # Remove -0.0
+    tableau[0] = np.where(tableau[0] == -0.0, 0.0, tableau[0])  
        
     for var in basic_vars:
-        if var.startswith("a"):  # Only for artificial variables
+        if var.startswith("a"):  
             idx = vararr.index(var)
-            tableau[0][idx]=M                    # Large number for Big M method
-   
+            tableau[0][idx]=M                    
 
-    #multiplay the first row "objective row by -1
+
+    steps += "<h3>Enter M in objective function</h3>"
+    steps += format_tableau_html(tableau, vararr, basic_vars)
     
-    # print(tableau)
-
-
-    #make col in objective function a col eqyal zeros by row operation Objectivenew=objective+(m)row of a "all a "
 
     for var in basic_vars: 
         if var.startswith("a"):                   
          idx = basic_vars.index(var) + 1 
          tableau[0, :] += -M * tableau[idx, :] 
    
-    
+    steps += "<h3>Remove A's from objective function</h3>"
+    steps += format_tableau_html(tableau, vararr, basic_vars)
 
-    # Simplex Iteration
 
-    tableau, vararr, basic_vars = simpleximplementation(tableau,vararr,basic_vars,is_max)
+
+    step,tableau, vararr, basic_vars = simpleximplementation(tableau,vararr,basic_vars,is_max)
+
+    steps += step
+
+    return steps
    
       
 # # Example usage
