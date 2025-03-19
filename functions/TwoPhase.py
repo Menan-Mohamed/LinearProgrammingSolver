@@ -4,6 +4,9 @@ from functions.simplex_iteration import simpleximplementation,format_tableau_htm
 def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
 
     nparr = np.array(arr, dtype=float)
+    # steps = "<h3>NP ARR !!!!!!!!!!!!!</h3>"
+    # steps += format_tableau_html(nparr, vararr, basic_vars)
+    
 
     steps = "<h2>Two Phase Method Steps</h2>"
     
@@ -45,13 +48,17 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
     steps += format_tableau_html(tableau, vararr, basic_vars)
 
    
-    tableau[0, :] = 0  
-    tableau[0, :len(nparr[0])-1] = nparr[0, :-1]  # Restore only the original coefficients
+    tableau[0, :] = 0  # Reset the entire objective function row
+    tableau[0, :len(nparr[0])-2] = nparr[0, :-2]  # Restore only the original coefficients
     tableau[0, -1] = -1*nparr[0, -1]  # Restore the RHS value (constant term)
 
 
     tableau[0] *= -1
     tableau[0] = np.where(tableau[0] == -0.0, 0.0, tableau[0])
+
+
+    steps += "<h3>Restore original objective function</h3>"
+    steps += format_tableau_html(tableau, vararr, basic_vars)
 
 
     for var in basic_vars:
@@ -60,7 +67,7 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
         coeff = tableau[0, vararr.index(var)]  # Get the coefficient in the objective function
         tableau[0, :] -= coeff * tableau[row_idx, :]  # Adjust the objective function row
 
-    steps += "<h3>Restore original objective function</h3>"
+    steps += "<h3>Reset the basic in objective function</h3>"
     steps += format_tableau_html(tableau, vararr, basic_vars)
 
     step,tableau, vararr, basic_vars = simpleximplementation(tableau,vararr,basic_vars,is_max)

@@ -9,7 +9,16 @@ def simpleximplementation(tableau,vararr,basicarr,maxi):
 
     row, col = nparr.shape 
 
-    flagend = 1
+
+    flagend = 0
+    if maxi :
+        for i in range (col-1):
+            if nparr[0][i] < 0 :
+                flagend = 1
+    else: 
+        for i in range (col-1):
+            if nparr[0][i] > 0 :
+                flagend = 1
 
     while(flagend):
 
