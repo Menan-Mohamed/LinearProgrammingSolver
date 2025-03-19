@@ -5,10 +5,9 @@ def construct_tableau(arr,unsflags,varnum,constraints):
       
     nparr = np.array(arr, dtype=float)
     
-    # Define variable names
     vararr = [f"x{i+1}" for i in range(varnum)]
 
-    # Remove the constraint type column and RHS temporarily
+
     tableau = np.delete(nparr, -2, axis=1)  # Remove the second-to-last column
     rhs = tableau[:, -1].reshape(-1, 1)  # Store RHS
     tableau = np.delete(tableau, -1, axis=1)  # Remove RHS from tableau
@@ -20,19 +19,19 @@ def construct_tableau(arr,unsflags,varnum,constraints):
 
     np.set_printoptions(suppress=True, precision=2) 
 
-    # Process constraints and add slack/artificial variables
+
     for i in range(constraints):
         constraint_type = int(nparr[i+1, -2])  # The column before RHS
         
-        if constraint_type == 0:  # '=' constraint
+        if constraint_type == 0:  
             vararr.append(f"a{artificial_num}")
             basic_vars.append(f"a{artificial_num}")
             artificial_num += 1
             new_col = np.zeros((len(nparr), 1))
-            new_col[i+1, 0] = 1  # Set 1 in the respective row
+            new_col[i+1, 0] = 1  
             tableau = np.hstack((tableau, new_col))
         
-        elif constraint_type == -1:  # '<=' constraint
+        elif constraint_type == -1: 
             vararr.append(f"s{slack_num}")
             basic_vars.append(f"s{slack_num}")
             slack_num += 1
@@ -40,21 +39,20 @@ def construct_tableau(arr,unsflags,varnum,constraints):
             new_col[i+1, 0] = 1
             tableau = np.hstack((tableau, new_col))
         
-        elif constraint_type == 1:  # '>=' constraint
+        elif constraint_type == 1: 
             vararr.append(f"s{slack_num}")
             slack_num += 1
             slack_col = np.zeros((len(nparr), 1))
-            slack_col[i+1, 0] = -1  # Slack variable with -1
+            slack_col[i+1, 0] = -1  
             tableau = np.hstack((tableau, slack_col))
             
             vararr.append(f"a{artificial_num}")
             basic_vars.append(f"a{artificial_num}")
             artificial_num += 1
             artificial_col = np.zeros((len(nparr), 1))
-            artificial_col[i+1, 0] = 1  # Artificial variable with 1
+            artificial_col[i+1, 0] = 1  
             tableau = np.hstack((tableau, artificial_col))
            
-    #print(tableau) 
 
     tableau = np.hstack((tableau, rhs)) 
 

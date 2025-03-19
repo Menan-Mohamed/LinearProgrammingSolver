@@ -1,8 +1,5 @@
 import numpy as np
-from simplex_iteration import simpleximplementation,format_tableau_html
-from constraction import construct_tableau
-
-
+from functions.simplex_iteration import simpleximplementation,format_tableau_html
 
 def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
 
@@ -48,11 +45,9 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
     steps += format_tableau_html(tableau, vararr, basic_vars)
 
    
-# Restore original objective function
-    tableau[0, :] = 0  # Reset the entire objective function row
+    tableau[0, :] = 0  
     tableau[0, :len(nparr[0])-1] = nparr[0, :-1]  # Restore only the original coefficients
     tableau[0, -1] = -1*nparr[0, -1]  # Restore the RHS value (constant term)
-# Copy original objective function coefficients
 
 
     tableau[0] *= -1
@@ -73,9 +68,9 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
     steps += step
 
     return steps
-  
+
     
-    
+
 # # Example usage
 # array = [
 #     [1, 2, 1, 0, 0],  # Objective function
@@ -91,5 +86,5 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
 #     [0, 3, -1, 2],  # Constraint 2: 2x1 - 5x2 = 10
 # ]
 
-# tableau,vararr,basic_vars,maxi = construct_tableau(array,0,[1,1],2,3)
+# tableau,vararr,basic_vars,maxi = construct_tableau(array,[1,1],2,2)
 # two_phase_simplex(array,tableau,vararr,basic_vars,maxi)
