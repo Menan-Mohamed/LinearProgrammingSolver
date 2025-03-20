@@ -150,10 +150,7 @@ class Ui_Dialog(object):
 
         # print(self.dropdown1.currentText()  +"jjj")
 
-        if (self.dropdown1.currentText() == "Maximize"):
-            row.append(1)
-        else:
-            row.append(0)    
+        row.append(0)    
         row.append(0)
 
         self._2Darray.append(row)
