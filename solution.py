@@ -42,7 +42,7 @@ class Ui_Dialog(QtWidgets.QDialog):
 
         self.pushButton = QtWidgets.QPushButton("Back",self.widget)
         self.pushButton.setGeometry(QtCore.QRect(130, 490, 300, 40))
-        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

@@ -10,6 +10,12 @@ class Ui_Dialog(object):
 
     def setupUi(self, Dialog, main_app):
 
+        self.lineEdits_obj = [] 
+        self.constraintRows = [] 
+        self.lineEdits_vec = []  
+        self._2Darray = []  
+        self.simplex = 1
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(600, 600)
         Dialog.setStyleSheet("background-color: rgba(220, 220, 220, 0.5);")
@@ -28,35 +34,29 @@ class Ui_Dialog(object):
           
         self.lineEdit = QtWidgets.QLineEdit(parent=self.widget)
         self.lineEdit.setGeometry(QtCore.QRect(20, 45, 180, 30))
-        self.lineEdit.setPlaceholderText("enter here")
+        self.lineEdit.setPlaceholderText("Enter Here")
         self.lineEdit.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #334;")
         
         self.pushButton_setVars = QtWidgets.QPushButton("Set", parent=self.widget)
         self.pushButton_setVars.setGeometry(QtCore.QRect(220, 45, 100, 30))
-        self.pushButton_setVars.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton_setVars.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
          
         self.label_2 = QtWidgets.QLabel("Enter the coefficients of the objective function:", parent=self.widget)
-        self.label_2.setGeometry(QtCore.QRect(20, 88, 400, 30))
+        self.label_2.setGeometry(QtCore.QRect(20, 88, 520, 30))
         self.label_2.setStyleSheet("border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
 
         self.widget_2 = QtWidgets.QWidget(parent=self.widget)
-        self.widget_2.setGeometry(QtCore.QRect(20, 121, 500, 40))
+        self.widget_2.setGeometry(QtCore.QRect(20, 121, 520, 40))
         self.widget_2.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
         self.layout_obj = QtWidgets.QHBoxLayout(self.widget_2)
-
-        self.lineEdits_obj = [] 
-        self.constraintRows = [] 
-        self.lineEdits_vec = []  
-        self._2Darray = []  
-        self.simplex = 1
 
         self.dropdown1 = QtWidgets.QComboBox(parent=self.widget_2)
         self.dropdown1.addItems(["Maximize", "Minimize"])
         self.layout_obj.addWidget(self.dropdown1)
 
-        self.pushButton = QtWidgets.QPushButton("Add a constraint row +", parent=self.widget)
+        self.pushButton = QtWidgets.QPushButton("Add a constraint row", parent=self.widget)
         self.pushButton.setGeometry(QtCore.QRect(20, 174, 200, 30))
-        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton.setStyleSheet("border-radius: 2px; background-color:#008CBA; color: white;")
 
         self.dropdown2 = QtWidgets.QComboBox(parent=self.widget)
         self.dropdown2.addItems(["Big M", "Two Phase"])
@@ -72,12 +72,12 @@ class Ui_Dialog(object):
         self.constraintsLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
 
         self.label_3 = QtWidgets.QLabel("Enter decision variables' constraints (≤ restricted,- unrestricted)", parent=self.widget)
-        self.label_3.setGeometry(QtCore.QRect(20, 419, 500, 30))
+        self.label_3.setGeometry(QtCore.QRect(20, 419, 520, 30))
         self.label_3.setStyleSheet("border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
 
 
         self.widget_3 = QtWidgets.QWidget(parent=self.widget)
-        self.widget_3.setGeometry(QtCore.QRect(20, 450, 500, 40))
+        self.widget_3.setGeometry(QtCore.QRect(20, 450, 520, 40))
         self.widget_3.setStyleSheet("border: 0.5px solid rgba(150, 150, 150, 0.9);border-radius: 2px;font-size: 14px; font-weight: bold; color: #333;")
         self.layout_vec = QtWidgets.QHBoxLayout(self.widget_3)
 
@@ -85,11 +85,11 @@ class Ui_Dialog(object):
 
         self.pushButton_2 = QtWidgets.QPushButton("Submit", parent=self.widget)
         self.pushButton_2.setGeometry(QtCore.QRect(380, 510, 161, 30))
-        self.pushButton_2.setStyleSheet("border-radius: 2px; background-color:#4CAF50; color: white;")
+        self.pushButton_2.setStyleSheet("border-radius: 2px; background-color:#008CBA; color: white;")
 
         self.pushButton_3 = QtWidgets.QPushButton("Back", parent=self.widget)
         self.pushButton_3.setGeometry(QtCore.QRect(20, 510, 161, 30))
-        self.pushButton_3.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton_3.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
 
 
         self.pushButton.clicked.connect(self.addConstraintRow)
@@ -126,15 +126,14 @@ class Ui_Dialog(object):
             self.lineEdits_obj.append(lineEdit)
 
         for i in range(num_vars):
-            lineEdit = QtWidgets.QLineEdit()
-            lineEdit.setPlaceholderText(f"x{i+1}")
-            self.layout_vec.insertWidget(i*2, lineEdit)
+            label = QtWidgets.QLabel(f"x{i+1}")
+            self.layout_vec.insertWidget(i*2, label)
 
             constraint_type = QtWidgets.QComboBox()
             constraint_type.addItems(["≤", "-"])
             self.layout_vec.insertWidget(i * 2 + 1,constraint_type)
 
-            self.lineEdits_vec.append((lineEdit, constraint_type))
+            self.lineEdits_vec.append((label, constraint_type))
     
 
     def extractValues(self):

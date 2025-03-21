@@ -21,13 +21,11 @@ class Ui_Dialog(object):
         
         self.pushButton = QtWidgets.QPushButton(parent=self.widget)
         self.pushButton.setGeometry(QtCore.QRect(130, 250, 300, 40))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
         
         self.pushButton_2 = QtWidgets.QPushButton(parent=self.widget)
         self.pushButton_2.setGeometry(QtCore.QRect(130, 300, 300, 40))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton_2.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
         
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

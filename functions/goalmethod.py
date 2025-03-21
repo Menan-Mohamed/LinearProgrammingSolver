@@ -113,9 +113,9 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
     return tableau
 
 # Sample Input Data
-constr = [[100, 60, -1, 600]]  # More than one constraint
-goal = [[7, 3, -1, 40], [10, 5, -1, 60], [5, 4, -1, 35]]
-num_goals = len(goal)
-num_constr = len(constr)
+# constr = [[100, 60, -1, 600]]  # More than one constraint
+# goal = [[7, 3, -1, 40], [10, 5, -1, 60], [5, 4, -1, 35]]
+# num_goals = len(goal)
+# num_constr = len(constr)
 
-goals(goal, constr, num_goals, num_constr,0)
+# goals(goal, constr, num_goals, num_constr,0)

@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 
 class Ui_Dialog(object):
     
@@ -22,13 +22,15 @@ class Ui_Dialog(object):
         
         self.pushButton = QtWidgets.QPushButton(parent=self.widget)
         self.pushButton.setGeometry(QtCore.QRect(130, 250, 300, 40))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #4CAF50; color: white;")
+        self.pushButton.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
         
         self.pushButton_2 = QtWidgets.QPushButton(parent=self.widget)
         self.pushButton_2.setGeometry(QtCore.QRect(130, 300, 300, 40))
-        self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
+
+        self.pushButton_3 = QtWidgets.QPushButton(parent=self.widget)
+        self.pushButton_3.setGeometry(QtCore.QRect(130, 350, 300, 40))
+        self.pushButton_3.setStyleSheet("border-radius: 2px; background-color: #008CBA; color: white;")
         
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -39,4 +41,5 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Choose the starting Method approach:"))
         self.pushButton.setText(_translate("Dialog", "Simplex Method"))
         self.pushButton_2.setText(_translate("Dialog", "Goal Programming"))
+        self.pushButton_3.setText(_translate("Dialog", "Back"))
 
