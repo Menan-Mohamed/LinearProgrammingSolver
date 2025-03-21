@@ -1,11 +1,13 @@
 from PyQt6 import QtCore,  QtWidgets
-from functions.goalmethod import goals
+from functions.goalmethod import goals,tableau_html
+
 
 class Ui_Dialog(object):
 
     def setupUi(self, Dialog,main_app):
 
         self.goalRows = []
+        self.main_app = main_app
         self.constraintRows = []
         self.constraints = []
         self.goals = []
@@ -222,11 +224,21 @@ class Ui_Dialog(object):
     def onSubmit(self):
         self.extractConstraints()
         self.extractGoals()
+
+        print("constraints", self.constraints)
+        print("goals", self.goals)  
+
         vec = []
         for _, constraint_type in self.lineEdits_vec:
             vec.append(1 if constraint_type.currentText() == "≤" else -1)
 
-        goals(self.goals, self.constraints, len(self.goals), len(self.constraints),0)
+
+        self.output_text = goals(self.goals, self.constraints, len(self.goals), len(self.constraints),0)
+
+
+
+        self.main_app.go_to_output(self.output_text)
+
 
 
     def retranslateUi(self, Dialog):
