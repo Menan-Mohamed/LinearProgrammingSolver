@@ -29,12 +29,10 @@ def BigM(tableau,vararr,basic_vars,is_max):
     steps += "<h3>Remove A's from objective function</h3>"
     steps += format_tableau_html(tableau, vararr, basic_vars)
 
-
-
     step,tableau, vararr, basic_vars = simpleximplementation(tableau,vararr,basic_vars,is_max)
 
     steps += step
-
+  
     return steps
    
       

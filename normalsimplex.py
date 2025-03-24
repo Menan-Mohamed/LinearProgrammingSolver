@@ -1,6 +1,6 @@
 from PyQt6 import QtCore,  QtWidgets
 from functions import *
-from functions.constraction import construct_tableau
+from functions.construct_tableau import construct_tableau
 from functions.simplex_iteration import simpleximplementation
 from functions.BigM import BigM
 from functions.TwoPhase import two_phase_simplex

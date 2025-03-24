@@ -67,7 +67,15 @@ def simpleximplementation(tableau,vararr,basicarr,maxi):
 
 
     steps += "<h3>Final Tableau:</h3>" + format_tableau_html(nparr, vararr, basicarr)
-    # print(steps)
+    for var in basicarr: 
+         if var.startswith("a"):                   
+           steps += "<p style='color:red;'><b>Problem is infeasible</b></p>"
+           return steps,nparr,vararr,basicarr
+         
+    steps += "<h3>Optimal Solution:</h3>"
+    for i in range(1, len(basicarr)+1):
+        steps += f"<p>{basicarr[i-1]} = {nparr[i][-1]:.2f}</p>"
+    steps += f"<p>Z = {nparr[0][-1]:.2f}</p>"
     return steps,nparr,vararr,basicarr
 
 
@@ -102,8 +110,10 @@ def format_tableau_html(tableau, vararr, basicarr, pivotcol=None, pivotrow=None)
                 html += f"<td style='{cell_color}'>{val:.2f}</td>"
 
             html += "</tr>"
-
+        
         html += "</table><br>"
+        html +="<h4>basic variables: " + str(basicarr) +"</h4>"
+        html +="<h4>non-basic variables: " + str(vararr) + "<br> </h4>"
         return html
 
 

@@ -120,6 +120,14 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
     print(basic_vars)
     print(vararr)
 
+    steps += "<h3>Goals states are: </h3>"
+    for i in range(num_goals):
+     if f"s{i+1}+" in basic_vars:
+        steps += f'<h4>Goal {i+1} is <span style="color:green;">overachieved</span></h4>'
+     elif f"s{i+1}-" in basic_vars:
+        steps += f'<h4>Goal {i+1} is <span style="color:red;">underachieved</span></h4>'
+     else:
+        steps += f'<h4>Goal {i+1} is <span style="color:green;">achieved</span></h4>'
     return steps
 
 

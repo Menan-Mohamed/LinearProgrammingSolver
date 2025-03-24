@@ -4,9 +4,6 @@ from functions.simplex_iteration import simpleximplementation,format_tableau_htm
 def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
 
     nparr = np.array(arr, dtype=float)
-    # steps = "<h3>NP ARR !!!!!!!!!!!!!</h3>"
-    # steps += format_tableau_html(nparr, vararr, basic_vars)
-    
 
     steps = "<h2>Two Phase Method Steps</h2>"
     
@@ -35,6 +32,11 @@ def two_phase_simplex(arr,tableau, vararr, basic_vars,is_max):
    
     
     step,tableau, vararr, basic_vars = simpleximplementation(tableau,vararr,basic_vars,0)
+
+    for var in basic_vars: 
+         if var.startswith("a"):                   
+           steps += "<p style='color:red;'><b>Problem is infeasible</b></p>"
+           return steps
 
     steps += step
 
