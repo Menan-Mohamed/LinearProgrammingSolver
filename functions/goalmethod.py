@@ -21,6 +21,8 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
     
     # Basic variables (start with -s for goal rows + slack variables)
     basic_vars = [f"s{i+1}-" for i in range(num_goals)]
+    goalvar = [f"Z{i+1}" for i in range(num_goals)]
+
     for i in range(num_constr):
         basic_vars.append(f"slack{i+1}")
     
@@ -41,11 +43,8 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
         tableau[num_goals + num_goals + i, num_vars + num_goals * 2 + i] = 1  # Assign slack variable
         tableau[num_goals + num_goals + i, -1] = constr_arr[i][-1]  # RHS
     
-    # print("Variable Array:", vararr)
-    # print("Basic Variables:", basic_vars)
-    # print("Initial Tableau:")
-    # print(tableau)
-    steps += tableau_html(tableau, vararr, basic_vars, num_goals)   
+    
+    steps += tableau_html(tableau, vararr, basic_vars,goalvar, num_goals)   
 
 
 
@@ -101,8 +100,8 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
             break
 
         print(minpos,pivotcol)
-        entering = vararr[pivotcol]
-        leaving = basic_vars[minpos - num_goals]
+
+        steps += tableau_html(tableau, vararr, basic_vars,goalvar, num_goals,pivotcol,minpos)
 
         basic_vars[minpos-num_goals] = vararr[pivotcol]
 
@@ -112,7 +111,7 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
             if i == minpos : continue
             tableau[i] = -1 * tableau[i][pivotcol] * tableau[minpos] + tableau[i]
 
-        steps += tableau_html(tableau, vararr, basic_vars, num_goals)  
+        steps += tableau_html(tableau, vararr, basic_vars,goalvar, num_goals)  
 
 
 
@@ -124,7 +123,7 @@ def goals(goal_arr, constr_arr, num_goals, num_constr,maxi):
     return steps
 
 
-def tableau_html(tableau, vararr, basicarr, num_goals, pivotcol=None, pivotrow=None):
+def tableau_html(tableau, vararr, basicarr,goalarr, num_goals, pivotcol=None, pivotrow=None):
     """Formats the tableau into an HTML table with highlighted pivot elements."""
     html = "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse;'>"
 
@@ -140,9 +139,7 @@ def tableau_html(tableau, vararr, basicarr, num_goals, pivotcol=None, pivotrow=N
 
         # First row (Objective function or Artificial Row)
         if i < num_goals:
-            html += f"<td><b>P({i+1})</b></td>"
-        elif i == num_goals:
-            html += "<td><b>Z</b></td>"
+            html += f"<td><b>{goalarr[i]}</b></td>"
         else:
             html += f"<td><b>{basicarr[i - num_goals]}</b></td>"
 
@@ -156,8 +153,15 @@ def tableau_html(tableau, vararr, basicarr, num_goals, pivotcol=None, pivotrow=N
             if pivotrow == i and pivotcol == j:  
                 cell_color = "background-color: orange; font-weight: bold;"
 
-            html += f"<td style='{cell_color}'>{val:.2f}</td>"
+            if i < num_goals:
+                if val != 0:
+                    html += f"<td style='{cell_color}'>{val:.2f}P{i+1}</td>"
+                else:
+                    html += f"<td style='{cell_color}'>{val:.2f}</td>"
+            else:
+                html += f"<td style='{cell_color}'>{val:.2f}</td>"      
 
+        
         html += "</tr>"
 
     html += "</table><br>"
