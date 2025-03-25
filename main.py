@@ -63,7 +63,7 @@ class MainApp(QtWidgets.QStackedWidget):
         self.setCurrentWidget(self.goal_page)
 
     def go_to_output(self, output_text):
-        print("wohooooooooooooooooooo"+ output_text)
+        # print("wohooooooooooooooooooo"+ output_text)
         self.setCurrentWidget(self.output_page) 
         self.output_ui.set_output_text(output_text) 
 

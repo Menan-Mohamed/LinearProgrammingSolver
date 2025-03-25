@@ -166,6 +166,7 @@ class Ui_Dialog(object):
 
     def extractConstraints(self):
         """extract values from constraint rows on submit."""
+        self.constraints.clear()
         constraint_map = {"=": 0, "≤": -1, "≥": 1}
 
         for row_inputs, constraint_type, rhs in self.constraintRows:
@@ -194,6 +195,7 @@ class Ui_Dialog(object):
         print("constraints", self.constraints)
     def extractGoals(self):
         """extract values from goal rows on submit."""
+        self.goals.clear()
         constraint_map = {"=": 0, "≤": -1, "≥": 1}
 
         for row_inputs, constraint_type, rhs in self.goalRows:
