@@ -72,9 +72,9 @@ def construct_tableau(arr,unsflags,varnum,constraints):
            
     
             # Update the variable list
-            vararr = np.delete(vararr, j)  # Remove the unrestricted variable
-            vararr = np.insert(vararr, j, f"x*{i+1}")
-            vararr = np.insert(vararr, j, f"x**{i+1}")
+            vararr.pop(j)  # Remove the unrestricted variable
+            vararr.insert(j, f"x'{i+1}")
+            vararr.insert(j, f"x''{i+1}")
 
             j = j+1
         j += 1

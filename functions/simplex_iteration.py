@@ -112,8 +112,8 @@ def format_tableau_html(tableau, vararr, basicarr, pivotcol=None, pivotrow=None)
             html += "</tr>"
         
         html += "</table><br>"
-        html +="<h4>basic variables: " + str(basicarr) +"</h4>"
-        html +="<h4>non-basic variables: " + str(vararr) + "<br> </h4>"
+        # html +="<h4>basic variables: " + str(basicarr) +"</h4>"
+        # html +="<h4>non-basic variables: " + str(vararr) + "<br> </h4>"
         return html
 
 
