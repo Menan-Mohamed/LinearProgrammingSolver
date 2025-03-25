@@ -25,7 +25,7 @@ class Ui_Dialog(QtWidgets.QDialog):
 
         # scrollable
         self.scroll_area = QtWidgets.QScrollArea(self.widget)
-        self.scroll_area.setGeometry(QtCore.QRect(20, 100, 520, 350))
+        self.scroll_area.setGeometry(QtCore.QRect(5, 10, 550, 470))
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setObjectName("scroll_area")
 

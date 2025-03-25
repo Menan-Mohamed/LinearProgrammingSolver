@@ -43,7 +43,7 @@ class MainApp(QtWidgets.QStackedWidget):
         self.method_selection_ui.pushButton.clicked.connect(self.go_to_simplex)  
         self.method_selection_ui.pushButton_2.clicked.connect(self.go_to_goal)
         self.method_selection_ui.pushButton_3.clicked.connect(self.go_to_start)
-        self.output_ui.pushButton.clicked.connect(self.go_to_simplex)
+        self.output_ui.pushButton.clicked.connect(self.go_to_method_selection)
         self.simplex_ui.pushButton_3.clicked.connect(self.go_to_method_selection)
         self.goal_ui.pushButton_3.clicked.connect(self.go_to_method_selection) 
 
